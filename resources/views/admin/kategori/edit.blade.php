@@ -10,8 +10,10 @@
         Elements
     </h4>
 
-    <form action="{{ route('admin.kategori.up') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.kategori.update', $kategori->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
+
+    @method('PUT')
 
     <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
         <!-- Judul -->

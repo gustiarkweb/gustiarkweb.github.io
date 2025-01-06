@@ -1,14 +1,24 @@
 <?php
 
+use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\DaftarguruController;
+use App\Http\Controllers\DaftarpelajaranController;
 use App\Http\Controllers\DaftarsiswaController;
+use App\Http\Controllers\DepanController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KegiatanekskulController;
+use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\OsisController;
+use App\Http\Controllers\PiketController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UdinController;
+use App\Models\Kegiatanekskul;
 use Illuminate\Support\Facades\Route;
-
 
 
 
@@ -27,23 +37,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+
+
+Route::get('/', [DepanController::class, 'home'])->name('home'); 
+Route::get('/artikel', [DepanController::class, 'artikel'])->name('artikel');
+Route::get('/artikel/{slug}', [DepanController::class, 'artikeldetail'])->name('artikeldetail'); 
+
+
 
 
 //dashboard routes
 Route::group(['middleware' => ['auth'], 'prefix' => 'dashboard', 'as' => 'admin.'], function () {
     //single action controllers
     Route::get('/', HomeController::class)->name('home'); 
-
-
-
     //ini data dari controller
     Route::resource('artikel',ArtikelController::class);
+
     Route::resource('siswa',SiswaController::class);
+
     Route::resource('kategori',KategoriController::class);
+
     Route::resource('tag',TagController::class);
+
     Route::resource('daftarsiswa',DaftarsiswaController::class);
+
     Route::resource('jadwal',JadwalController::class);
+
+    Route::resource('daftarguru',DaftarguruController::class);
+
+    Route::resource('nilai',NilaiController::class);
+
+    Route::resource('kegiatanekskul',KegiatanekskulController::class);
+
+    Route::resource('piket',PiketController::class);
+
+    Route::resource('absen',AbsenController::class);
+
+    Route::resource('daftarpelajaran',DaftarpelajaranController::class);
+
+    Route::resource('osis',OsisController::class);
+    
+    Route::resource('slider',SliderController::class);
 
 
     //link that return view, to get compoment from there

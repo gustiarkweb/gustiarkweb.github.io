@@ -21,7 +21,14 @@ class Artikel extends Model
         'slug',
         'des',
         'image',
+        'user_id',
     ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
     public function kategori()
@@ -33,6 +40,11 @@ class Artikel extends Model
     public function tag()
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function getPictureAttribute()
+    {
+        return asset('storage/' . $this->image);
     }
 }
 

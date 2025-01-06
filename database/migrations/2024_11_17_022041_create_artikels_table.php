@@ -17,8 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->string('slug');
-            $table->text('des');
+            $table->longText('des');
             $table->string('image');
+            $table->foreignid('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

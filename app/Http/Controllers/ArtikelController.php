@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Artikel;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Kategori;
 use App\Models\Tag;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class ArtikelController extends Controller
@@ -19,7 +20,7 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        return view('admin.artikel.index' , [
+        return view('admin.artikel.index', [
             'artikel' => Artikel::paginate(5),
             'kategori' => Kategori::all(),
             'tag' => Tag::all()
@@ -50,7 +51,8 @@ class ArtikelController extends Controller
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'des' => $request->des,
-            'image' => $request->file ('image')->store('artikel','public')
+            'image' => $request->file ('image')->store('artikel','public'),
+            'user_id' => Auth::id()
         ]);
 
 
@@ -108,7 +110,8 @@ class ArtikelController extends Controller
             'judul' => $request->judul,
             'slug' => Str::slug($request->judul),
             'des' => $request->des,
-            'image' => $request->file ('image')->store('artikel','public')
+            'image' => $request->file ('image')->store('artikel','public'),
+            'user_id' => Auth::id()
         ]);
 
 
